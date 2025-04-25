@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        /* Cải tiến giao diện */
+        table {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .table th, .table td {
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .table img {
+            max-width: 80px;
+            height: 80px;
+            object-fit: cover;
+        }
+
+        .btn-outline-primary {
+            border: 1px solid #007bff;
+            color: #007bff;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .text-center {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .text-left {
+            font-size: 18px;
+        }
+
+        .text-right {
+            font-size: 18px;
+        }
+
+        .img-thumbnail {
+            border: 1px solid #ddd;
+        }
+
+    </style>
+</head>
+<body>
+<article>
+    <div class="container">
+        <h2 class="text-center my-4">Giỏ Hàng</h2>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Sản phẩm</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Tổng giá</th>
+                <th scope="col">Hành động</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cart : ${cart}">
+                <th scope="row" th:text="${cart.product.id}"></th>
+                <td>
+                    <img style="width: 80px; height: 80px; object-fit: cover;"
+                         th:src="@{'/images/' + ${cart.product.image}}" alt="Product Image" class="img-thumbnail">
+                    <span th:text="${cart.product.name}"></span>
+                </td>
+                <td th:text="${cart.product.price}"></td> VNĐ
+                <td>
+                    <div class="d-flex align-items-center">
+                        <a th:href="@{|/cart/update/${cart.product.id}?qty=-1|}" class="btn btn-sm btn-outline-primary">-</a>
+                        <span class="mx-2" th:text="${cart.quantity}"></span>
+                        <a th:href="@{|/cart/update/${cart.product.id}?qty=1|}" class="btn btn-sm btn-outline-primary">+</a>
+                    </div>
+                </td>
+                <td>
+                    <span th:text="${cart.totalPrice}"></span> VNĐ
+                </td>
+                <td>
+                    <a th:href="@{|/cart/remove/${cart.product.id}|}" class="btn btn-danger btn-sm">Xóa</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="row justify-content-between mt-3">
+            <div class="col">
+                <h4 class="text-left">Tổng tiền: <span th:text="${totalAmount}"></span> VNĐ</h4>
+                <h4 class="text-left">Tổng sản phẩm: <span th:text="${count}"></span></h4>
+            </div>
+            <div class="col text-right">
+                <a href="/cart/clear" class="btn btn-warning">Xóa giỏ hàng</a>
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+</body>
+</html>

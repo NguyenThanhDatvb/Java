@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Product List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Product List</h2>
+
+    <form action="/admin/product" method="post" class="row g-2">
+        <div class="col-md-8">
+            <input type="text" name="keywords" class="form-control" th:value="${keywords}" placeholder="Enter keywords...">
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-primary w-100">Search</button>
+        </div>
+    </form>
+
+    <div class="table-responsive mt-4">
+        <table class="table table-bordered table-hover table-striped">
+            <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Date</th>
+                <th>Image</th>
+                <th>Available</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="item: ${page.content}">
+                <tr>
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.name}"></td>
+                    <td th:text="${item.price}"></td>
+                    <td th:text="${item.createDate}"></td>
+                    <td th:text="${item.image}"></td>
+                    <td th:text="${item.available}"></td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" th:href="@{|/admin/product?p=0|}">First</a>
+            </li>
+            <li class="page-item" th:classappend="${page.number == 0} ? 'disabled'">
+                <a class="page-link" th:href="@{|/admin/product?p=${page.number - 1}|}">Previous</a>
+            </li>
+            <li class="page-item" th:classappend="${page.number + 1 >= page.totalPages} ? 'disabled'">
+                <a class="page-link" th:href="@{|/admin/product?p=${page.number + 1}|}">Next</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" th:href="@{|/admin/product?p=${page.totalPages - 1}|}">Last</a>
+            </li>
+        </ul>
+    </nav>
+
+    <ul class="list-group">
+        <li class="list-group-item">Số thực thể hiện tại: <span th:text="${page.numberOfElements}"></span></li>
+        <li class="list-group-item">Trang số: <span th:text="${page.number}"></span></li>
+        <li class="list-group-item">Kích thước trang: <span th:text="${page.size}"></span></li>
+        <li class="list-group-item">Tổng số thực thể: <span th:text="${page.totalElements}"></span></li>
+        <li class="list-group-item">Tổng số trang: <span th:text="${page.totalPages}"></span></li>
+    </ul>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

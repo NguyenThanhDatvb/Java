@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Boutique | Shop Quần Áo Cao Cấp</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #e83e8c;
+            --secondary: #6f42c1;
+            --dark: #343a40;
+            --light: #f8f9fa;
+            --accent: #fd7e14;
+            --text: #495057;
+            --text-light: #6c757d;
+            --border-radius: 8px;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Montserrat', 'Segoe UI', sans-serif;
+            color: var(--text);
+            background-color: #fafafa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .main-header {
+            background: linear-gradient(135deg, var(--dark), #212529);
+            color: white;
+            padding: 1.8rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .main-header h1 {
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin: 0;
+            font-size: 2.2rem;
+            position: relative;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .main-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin: 0.5rem 0 0;
+            position: relative;
+        }
+
+        /* Hero Slider */
+        .hero-slider {
+            height: 500px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 8s ease;
+        }
+
+        .hero-slider:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Navigation */
+        .main-navbar {
+            background-color: white !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 0.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1020;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary) !important;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand i {
+            margin-right: 8px;
+            font-size: 1.8rem;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark) !important;
+            padding: 0.8rem 1.2rem !important;
+            transition: var(--transition);
+            border-radius: var(--border-radius);
+            margin: 0 3px;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary) !important;
+            background-color: rgba(232, 62, 140, 0.1);
+        }
+
+        .dropdown-menu {
+            border: none;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
+            padding: 0.5rem 0;
+            margin-top: 8px;
+        }
+
+        .dropdown-item {
+            padding: 0.7rem 1.5rem;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(232, 62, 140, 0.1);
+            color: var(--primary);
+        }
+
+        .dropdown-divider {
+            margin: 0.3rem 0;
+        }
+
+        /* User Info */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            margin-left: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: rgba(233, 236, 239, 0.6);
+            border-radius: 50px;
+            transition: var(--transition);
+        }
+
+        .user-profile:hover {
+            background-color: rgba(233, 236, 239, 0.9);
+        }
+
+        .user-profile h5 {
+            margin: 0;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .user-profile i {
+            font-size: 1.2rem;
+            margin-right: 8px;
+            color: var(--primary);
+        }
+
+        /* Cart Icon */
+        .cart-icon {
+            position: relative;
+            margin-right: 1rem;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            background-color: white;
+            margin: 2rem auto;
+            width: 100%;
+            max-width: 1400px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .content-iframe {
+            width: 100%;
+            min-height: 70vh;
+            border: none;
+            background-color: white;
+        }
+
+        /* Footer */
+        .main-footer {
+            background: linear-gradient(135deg, var(--dark), #212529);
+            color: white;
+            padding: 2.5rem 0 1.5rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-link:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-link {
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 1rem;
+        }
+
+        /* Animations */
+        .animate-pop {
+            animation: popIn 0.4s ease-out;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .hero-slider {
+                height: 450px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .main-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-slider {
+                height: 400px;
+            }
+
+            .navbar-nav {
+                padding: 1rem 0;
+            }
+
+            .user-profile {
+                margin: 0.5rem 0;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-header {
+                padding: 1.5rem 0;
+            }
+
+            .main-header h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero-slider {
+                height: 350px;
+            }
+
+            .main-navbar {
+                padding: 0.5rem 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-slider {
+                height: 280px;
+            }
+
+            .main-header h1 {
+                font-size: 1.4rem;
+            }
+
+            .main-header p {
+                font-size: 0.95rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 0.8rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="main-header animate__animated animate__fadeIn">
+    <h1 class="animate__animated animate__fadeInDown">FASHION BOUTIQUE</h1>
+    <p class="animate__animated animate__fadeInUp animate__delay-1s">Nâng tầm phong cách của bạn</p>
+</header>
+
+<div class="hero-slider animate__animated animate__fadeIn animate__delay-1s">
+    <img src="https://theme.hstatic.net/1000392326/1000686717/14/ms_banner_img4.jpg?v=7074" alt="Fashion Collection">
+</div>
+
+<nav class="navbar navbar-expand-lg main-navbar animate__animated animate__fadeIn animate__delay-2s">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/sell" target="quan-ao">
+            <i class="fas fa-crown"></i> FASHION
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <div class="navbar-nav me-auto">
+                <a class="nav-link active" href="/sell" target="quan-ao">
+                    <i class="fas fa-home me-1"></i> Trang chủ
+                </a>
+
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="aoDropdown" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-tshirt me-1"></i> Áo
+                    </a>
+                    <ul class="dropdown-menu animate-pop">
+                        <li><a class="dropdown-item" href="/ao-hoodie" target="quan-ao">Áo Hoodie</a></li>
+                        <li><a class="dropdown-item" href="/ao-so-mi" target="quan-ao">Áo sơ mi</a></li>
+                        <li><a class="dropdown-item" href="/ao-dai" target="quan-ao">Áo dài</a></li>
+                        <li><a class="dropdown-item" href="/ao-khoac" target="quan-ao">Áo khoác</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="vayDropdown" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-female me-1"></i> Váy
+                    </a>
+                    <ul class="dropdown-menu animate-pop">
+                        <li><a class="dropdown-item" href="/chan-vay-midi" target="quan-ao">Chân váy Midi</a></li>
+                        <li><a class="dropdown-item" href="/vay-body" target="quan-ao">Váy ôm body</a></li>
+                    </ul>
+                </div>
+
+<!--                <div class="nav-item dropdown">-->
+<!--                    <a class="nav-link dropdown-toggle" href="#" id="phuKienDropdown" role="button" data-bs-toggle="dropdown">-->
+<!--                        <i class="fas fa-gem me-1"></i> Phụ kiện-->
+<!--                    </a>-->
+<!--                    <ul class="dropdown-menu animate-pop">-->
+<!--                        <li><a class="dropdown-item" href="/tui-xach" target="quan-ao">Túi xách</a></li>-->
+<!--                        <li><a class="dropdown-item" href="/that-lung" target="quan-ao">Thắt lưng</a></li>-->
+<!--                        <li><a class="dropdown-item" href="/giay-dep" target="quan-ao">Giày dép</a></li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+            </div>
+
+            <div class="navbar-nav ms-auto d-flex align-items-center">
+                <a class="nav-link cart-icon" href="/cart/view" target="quan-ao">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" th:text="${cartCount}"></span>
+                </a>
+
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-user-circle me-1"></i> Tài khoản
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end animate-pop">
+                        <li><a class="dropdown-item" href="/account/edit" target="quan-ao">
+                            <i class="fas fa-user-edit me-2"></i>Thông tin tài khoản
+                        </a></li>
+                        <li><a class="dropdown-item" href="/order/history" target="quan-ao">
+                            <i class="fas fa-history me-2"></i>Lịch sử đơn hàng
+                        </a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="/tranghome">
+                            <i class="fas fa-sign-out-alt me-2"></i> Đăng xuất
+                        </a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-cog me-1"></i> Quản trị
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end animate-pop">
+                        <li><h6 class="dropdown-header">Quản lý hệ thống</h6></li>
+                        <li><a class="dropdown-item" href="/category/index" target="quan-ao">
+                            <i class="fas fa-list me-2"></i>Danh mục
+                        </a></li>
+                        <li><a class="dropdown-item" href="/admin/product" target="quan-ao">
+                            <i class="fas fa-tshirt me-2"></i>Sản phẩm
+                        </a></li>
+                        <li><a class="dropdown-item" href="/accounts" target="quan-ao">
+                            <i class="fas fa-users me-2"></i>Tài khoản
+                        </a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">
+                            <i class="fas fa-chart-line me-2"></i>Thống kê
+                        </a></li>
+                    </ul>
+                </div>
+
+                <div class="user-profile">
+                    <i class="fas fa-user-circle"></i>
+                    <h5><span th:text="${user != null ? user.fullname : 'Khách'}"></span></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<article class="main-content animate__animated animate__fadeIn animate__delay-2s">
+    <iframe class="content-iframe" name="quan-ao" src="/sell"></iframe>
+</article>
+
+<footer class="main-footer animate__animated animate__fadeIn animate__delay-3s">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-logo">FASHION BOUTIQUE</div>
+
+            <div class="footer-links">
+                <a href="/about" class="footer-link">Về chúng tôi</a>
+                <a href="/policy" class="footer-link">Chính sách</a>
+                <a href="/contact" class="footer-link">Liên hệ</a>
+                <a href="/blog" class="footer-link">Blog thời trang</a>
+            </div>
+
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+            </div>
+
+            <div class="copyright">
+                © 2023 Fashion Boutique. All rights reserved.
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Thêm hiệu ứng khi scroll
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animation cho các phần tử
+        const animateOnScroll = function() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            elements.forEach(el => {
+                const elementPosition = el.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementPosition < windowHeight - 100) {
+                    el.classList.add('animate__animated', 'animate__fadeInUp');
+                }
+            });
+        };
+
+        // Chạy lần đầu khi load trang
+        animateOnScroll();
+
+        // Thêm event listener cho scroll
+        window.addEventListener('scroll', animateOnScroll);
+
+        // Hiệu ứng hover cho card sản phẩm
+        const productCards = document.querySelectorAll('.product-card');
+        productCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+                card.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.15)';
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+                card.style.boxShadow = '';
+            });
+        });
+    });
+</script>
+</body>
+</html>

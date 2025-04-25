@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        h2 {
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #dc3545;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+            border-radius: 15px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .card-text {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .btn-primary {
+            width: 80%;
+            margin: 10px auto 20px;
+            display: block;
+            padding: 10px 0;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .input-group .form-control {
+            height: 45px;
+            border-radius: 30px 0 0 30px;
+            border-right: none;
+        }
+
+        .input-group .btn-primary {
+            border-radius: 0 30px 30px 0;
+            height: 45px;
+        }
+
+        hr {
+            border-top: 2px solid #dee2e6;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 768px) {
+            .card-img-top {
+                height: 200px;
+            }
+        }
+        .input-group {
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .input-group .form-control {
+            border: none;
+            height: 45px;
+            padding-left: 20px;
+            font-size: 16px;
+            border-radius: 0;
+        }
+
+        .input-group .btn-primary {
+            border: none;
+            background-color: #007bff;
+            padding: 0 30px;
+            font-size: 16px;
+            height: 45px;
+            border-radius: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .input-group .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .search-box {
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        .search-input {
+            border: none;
+            padding: 12px 20px;
+            flex-grow: 1;
+            border-radius: 0;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .btn-search {
+            background-color: #007bff;
+            color: white;
+            padding: 0 25px;
+            border: none;
+            border-radius: 0;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-search:hover {
+            background-color: #0056b3;
+        }
+        .search-area {
+            padding: 30px 0;
+            background-color: #f8f9fa;
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+
+</head>
+<body>
+<header class="search-area">
+    <form action="/search" method="get" class="d-flex justify-content-center align-items-center">
+        <div class="search-box w-50 d-flex">
+            <input name="keywords" th:value="${keywords}" type="text" class="form-control search-input" placeholder="Enter keywords...">
+            <button type="submit" class="btn btn-search">Search</button>
+        </div>
+    </form>
+</header>
+
+<hr>
+
+<article>
+    <div class="d-flex justify-content-center " style="color: red">
+        <div>
+            <h2>Top mặt hàng sale 50-70%</h2>
+        </div>
+    </div>
+    <form>
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+
+                <div th:each="product : ${products}" class="col">
+                    <div class="card">
+                        <img style="width: 320px" th:src="@{'/images/' + ${product.image}}" class="card-img-top"
+                         >
+                        <div class="card-body text-center">
+                            <h5 class="card-title" th:text="${product.name}"></h5>
+                            <p class="card-text">
+                                <strong>Price: <span class="text-success" th:text="${product.price}"></span>VNĐ </strong>
+
+                            </p>
+                        </div>
+                        <a th:href="@{|/cart/add/${product.id}|}" class="btn btn-primary">Mua</a>
+
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </form>
+    <div class="d-flex justify-content-center " style="color: red">
+        <div>
+            <h2>Top mặt hàng mới !</h2>
+        </div>
+    </div>
+    <form>
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+
+                <div th:each="product : ${productss}" class="col">
+                    <div class="card">
+                        <img style="width: 320px" th:src="@{'/images/' + ${product.image}}" class="card-img-top"
+                       >
+                        <div class="card-body text-center">
+                            <h5 class="card-title" th:text="${product.name}"></h5>
+                            <p class="card-text">
+                                <strong>Price:<span class="text-success" th:text="${product.price}"></span>VNĐ</strong>
+                            </p>
+                        </div>
+                        <a th:href="@{|/cart/add/${product.id}|}" class="btn btn-primary">Mua</a>
+
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </form>
+    <div class="d-flex justify-content-center " style="color: red">
+        <div>
+            <h2>Top mặt hàng bán chạy</h2>
+        </div>
+    </div>
+    <form>
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+
+                <div th:each="product : ${productsss}" class="col">
+                    <div class="card">
+                        <img style="width: 320px" th:src="@{'/images/' + ${product.image}}" class="card-img-top"
+                           >
+                        <div class="card-body text-center">
+                            <h5 class="card-title" th:text="${product.name}"></h5>
+                            <p class="card-text">
+                                <strong>Price: <span class="text-success" th:text="${product.price}"></span> VNĐ </strong>
+
+                            </p>
+                        </div>
+                        <a th:href="@{|/cart/add/${product.id}|}" class="btn btn-primary">Mua</a>
+
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </form>
+</article>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

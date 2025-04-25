@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .card-img-top {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+<hr>
+<form action="/search" method="get" class="d-flex justify-content-center align-items-center">
+    <div class="input-group w-50">
+        <input name="keywords" th:value="${keywords}" type="text" class="form-control" placeholder="Enter keywords..." aria-label="Search">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+<hr>
+
+<br>
+
+
+<article>
+
+    <form>
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+
+                <div th:each="product : ${products}" class="col">
+                    <div class="card">
+                        <img style="width: 320px" th:src="@{'/images/' + ${product.image}}" class="card-img-top"
+                             alt="Nintendo Switch Lite">
+                        <div class="card-body text-center">
+                            <h5 class="card-title" th:text="${product.name}"></h5>
+                            <p class="card-text">
+                                <strong>Price: <span class="text-success" th:text="${product.price}"></span>$ </strong>
+
+                            </p>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Mua</button>
+
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </form>
+</article>
+</body>
+</html>

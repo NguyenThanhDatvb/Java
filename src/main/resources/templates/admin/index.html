@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Quản lý Danh mục</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f6f9;
+        }
+
+        h3 {
+            text-align: center;
+            margin-top: 30px;
+            color: #333;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .form-label {
+            font-weight: 600;
+        }
+
+        table {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        thead {
+            background-color: #0d6efd;
+            color: white;
+        }
+
+        .btn-link {
+            padding: 0;
+            font-weight: bold;
+        }
+
+        .btn-sm {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h3>QUẢN LÝ DANH MỤC</h3>
+
+<div class="container mt-4">
+    <div class="form-container">
+        <h4 class="mb-4">Form Danh mục</h4>
+        <form action="/category/index" th:object="${item}">
+            <div class="mb-3">
+                <label for="categoryId" class="form-label">Mã danh mục</label>
+                <input id="categoryId" th:field="*{id}" class="form-control" placeholder="Nhập mã danh mục" />
+            </div>
+            <div class="mb-3">
+                <label for="categoryName" class="form-label">Tên danh mục</label>
+                <input id="categoryName" th:field="*{name}" class="form-control" placeholder="Nhập tên danh mục" />
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between">
+                <button type="submit" formaction="/category/create" class="btn btn-primary">Thêm mới</button>
+                <button type="submit" formaction="/category/update" class="btn btn-warning">Cập nhật</button>
+                <a th:href="@{|/category/delete/${item.id}|}" class="btn btn-danger">Xoá</a>
+                <a href="/category/index" class="btn btn-secondary">Làm mới</a>
+            </div>
+        </form>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th><a href="/product/sort?field=id" class="btn btn-link text-white">ID</a></th>
+                <th>Tên danh mục</th>
+                <th>Thao tác</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="item: ${items}">
+                <tr>
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.name}"></td>
+                    <td>
+                        <a th:href="@{|/category/edit/${item.id}|}" class="btn btn-warning btn-sm">Sửa</a>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
