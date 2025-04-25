@@ -28,6 +28,7 @@ public class AuthController {
         return "dangnhap";
     }
 
+
     @PostMapping("/auth/login")
     public String loginProcess(
             @RequestParam("username") String username,
@@ -44,5 +45,10 @@ public class AuthController {
         session.setAttribute("user", user);
         session.setAttribute("isAdmin", user.isAdmin());
         return "redirect:/tranghome";
+    }
+    @GetMapping("/auth/logout")
+    public String logout() {
+        session.invalidate(); // Xóa toàn bộ session
+        return "redirect:/tranghome"; // Chuyển hướng về trang đăng nhập
     }
 }
